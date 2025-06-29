@@ -59,7 +59,27 @@ const series = defineCollection({
 		featured: z.boolean().default(false), // Пометка для популярных серий
 	}),
 });
+
+const seriescopy = defineCollection({
+	loader: glob({ base: "./src/content/seriescopy", pattern: "**/*.{md,mdx}" }),
+	schema: z.object({
+		id: z.string(),
+		title: z.string(),
+		description: z.string(),
+		featured: z.boolean().default(false), // Пометка для популярных серий
+	}),
+});
+
+const seriescopy2 = defineCollection({
+	loader: glob({ base: "./src/content/seriescopy2", pattern: "**/*.{md,mdx}" }),
+	schema: z.object({
+		id: z.string(),
+		title: z.string(),
+		description: z.string(),
+		featured: z.boolean().default(false), // Пометка для популярных серий
+	}),
+});
 // End
 
 // Series
-export const collections = { post, note, series, series copy, series copy 2 };
+export const collections = { post, note, series, seriescopy, seriescopy2 };
