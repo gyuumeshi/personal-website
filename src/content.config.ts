@@ -62,4 +62,4 @@ const series = defineCollection({
 // End
 
 // Series
-export const collections = { post, note, series };
+export const collections = { post, note, series, series copy, series copy 2 };
