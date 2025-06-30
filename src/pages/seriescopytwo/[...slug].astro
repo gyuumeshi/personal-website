@@ -1,7 +1,7 @@
 ---
 import { getCollection, type CollectionEntry, render } from "astro:content";
 
-import SeriesLayout from "@/layouts/Series.astro";
+import SeriesLayout from "@/layouts/SeriesCopyTwo.astro";
 import type { GetStaticPaths, InferGetStaticPropsType } from "astro";
 
 export const getStaticPaths = (async () => {
@@ -10,22 +10,22 @@ export const getStaticPaths = (async () => {
 	const validSeries = allSeries.filter((entry) => entry !== undefined);
 
 	return validSeries.map((entry) => ({
-		params: { slug: entry.id },
+		params: { slug: [entry.id] },
 		props: { series: entry },
 	}));
 }) satisfies GetStaticPaths;
 
 type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 
-const { series } = Astro.props;
+const { seriescopytwo } = Astro.props;
 
 if (!series) {
 	throw new Error("Series entry not found");
 }
 
-const { Content } = await render(series);
+const { Content } = await render(seriescopytwo);
 ---
 
-<SeriesLayout series={series}>
+<SeriesLayout seriescopytwo ={seriescopytwo}>
 	<Content />
 </SeriesLayout>
