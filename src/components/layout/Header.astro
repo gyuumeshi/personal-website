@@ -4,108 +4,79 @@ import ThemeToggle from "@/components/ThemeToggle.astro";
 import { siteConfig, menuLinks } from "@/site.config";
 import { Icon } from "astro-icon/components";
 
-// New line: Accept the `series` prop from the layout
 const { series } = Astro.props;
 const isSeries = Boolean(series);
+
+// Optional: Append extra Docs links if this is a series page
+const extraLinks = isSeries
+  ? [
+      { path: "/posts/citrus-docs/intro/", title: "Docs" },
+      { path: "/posts/citrus-docs-two/intro/", title: "Docs1" },
+      { path: "/posts/citrus-docs-three/intro/", title: "Docs2" },
+    ]
+  : [];
+
+const navLinks = [...menuLinks, ...extraLinks];
 ---
 
-<header id="main-header" ...>	
-	...
-	<nav ... id="main-navigation-menu">
-		{
-			menuLinks.map((link) => (
-				<a
-					aria-current={Astro.url.pathname === link.path ? "page" : false}
-					class="underline-offset-2 hover:underline"
-					data-astro-prefetch
-					href={link.path}
-				>
-					{link.title}
-				</a>
-			))
-		}
+<header id="main-header" class="w-full flex items-center justify-between px-6 py-4 bg-background text-foreground">
+  <a href="/" class="flex items-center gap-2 text-xl font-bold">
+    <Icon name="twemoji:grapefruit" class="h-6 w-6" />
+    {siteConfig.title}
+  </a>
 
-		{isSeries && (
-			<>
-				<a
-					class="flex h-8 items-center rounded-lg bg-accent-base/5 px-4 text-accent-base underline-offset-2 hover:bg-accent-base/10"
-					data-astro-prefetch
-					href="/posts/citrus-docs/intro/"
-				>
-					Docs
-				</a>
+  <nav id="main-navigation-menu" class="hidden md:flex items-center gap-6">
+    {navLinks.map((link) => (
+      <a
+        href={link.path}
+        class="underline-offset-2 hover:underline"
+        aria-current={Astro.url.pathname === link.path ? "page" : undefined}
+        data-astro-prefetch
+      >
+        {link.title}
+      </a>
+    ))}
+    <Search />
+    <ThemeToggle />
+  </nav>
 
-				<a
-					class="flex h-8 items-center rounded-lg bg-accent-base/5 px-4 text-accent-base underline-offset-2 hover:bg-accent-base/10"
-					data-astro-prefetch
-					href="/posts/citrus-docs-two/intro/"
-				>
-					Docs1
-				</a>
-
-				<a
-					class="flex h-8 items-center rounded-lg bg-accent-base/5 px-4 text-accent-base underline-offset-2 hover:bg-accent-base/10"
-					data-astro-prefetch
-					href="/posts/citrus-docs-three/intro/"
-				>
-					Docs2
-				</a>
-			</>
-		)}
-	</nav>
-
-	...
+  <!-- Mobile hamburger -->
+  <button
+    id="menu-toggle"
+    class="md:hidden text-accent-base focus:outline-none"
+    onclick="document.getElementById('drawer').classList.toggle('hidden')"
+    aria-label="Open mobile menu"
+  >
+    <Icon name="lucide:menu" class="h-6 w-6" />
+  </button>
 </header>
 
 <!-- Mobile Drawer Navigation -->
-<div id="drawer" class="fixed inset-0 z-10 hidden" aria-hidden="true">
-	...
-	<nav
-		aria-label="Mobile navigation menu"
-		class="text-lg absolute inset-0 flex flex-col items-center justify-center gap-y-4 text-center font-medium text-accent-two"
-		id="nav-menu-mobile"
-	>
-		{
-			menuLinks.map((link) => (
-				<a
-					aria-current={Astro.url.pathname === link.path ? "page" : false}
-					class="underline-offset-2 hover:underline"
-					data-astro-prefetch
-					href={link.path}
-				>
-					{link.title}
-				</a>
-			))
-		}
+<div id="drawer" class="fixed inset-0 z-10 hidden bg-background bg-opacity-95 backdrop-blur-md md:hidden" aria-hidden="true">
+  <button
+    class="absolute top-4 right-4 text-accent-base focus:outline-none"
+    onclick="document.getElementById('drawer').classList.add('hidden')"
+    aria-label="Close mobile menu"
+  >
+    <Icon name="lucide:x" class="h-6 w-6" />
+  </button>
 
-		{isSeries && (
-			<>
-				<a
-					class="flex h-8 items-center rounded-lg bg-accent-base/5 px-4 text-accent-base underline-offset-2 hover:bg-accent-base/10"
-					data-astro-prefetch
-					href="/posts/citrus-docs/intro/"
-				>
-					Docs
-				</a>
-
-				<a
-					class="flex h-8 items-center rounded-lg bg-accent-base/5 px-4 text-accent-base underline-offset-2 hover:bg-accent-base/10"
-					data-astro-prefetch
-					href="/posts/citrus-docs-two/intro/"
-				>
-					Docs1
-				</a>
-
-				<a
-					class="flex h-8 items-center rounded-lg bg-accent-base/5 px-4 text-accent-base underline-offset-2 hover:bg-accent-base/10"
-					data-astro-prefetch
-					href="/posts/citrus-docs-three/intro/"
-				>
-					Docs2
-				</a>
-			</>
-		)}
-	</nav>
+  <nav
+    id="nav-menu-mobile"
+    aria-label="Mobile navigation menu"
+    class="absolute inset-0 flex flex-col items-center justify-center gap-y-6 text-center font-medium text-accent-two text-lg"
+  >
+    {navLinks.map((link) => (
+      <a
+        href={link.path}
+        class="underline-offset-2 hover:underline"
+        aria-current={Astro.url.pathname === link.path ? "page" : undefined}
+        data-astro-prefetch
+      >
+        {link.title}
+      </a>
+    ))}
+    <Search />
+    <ThemeToggle />
+  </nav>
 </div>
-
-
