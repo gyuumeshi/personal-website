@@ -6,7 +6,10 @@ import type { GetStaticPaths, InferGetStaticPropsType } from "astro";
 
 export const getStaticPaths = (async () => {
 	const allSeries = await getCollection("seriescopy2");
-	return allSeries.map((entry) => ({
+
+	const validSeries = allSeries.filter((entry) => entry !== undefined);
+
+	return validSeries.map((entry) => ({
 		params: { slug: entry.id },
 		props: { series: entry },
 	}));
@@ -15,6 +18,11 @@ export const getStaticPaths = (async () => {
 type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 
 const { series } = Astro.props;
+
+if (!series) {
+	throw new Error("Series entry not found");
+}
+
 const { Content } = await render(series);
 ---
 
