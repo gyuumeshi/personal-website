@@ -19,7 +19,7 @@ type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 
 const { seriescopy } = Astro.props;
 
-if (!series) {
+if (!seriescopy) {
 	throw new Error("Series entry not found");
 }
 
