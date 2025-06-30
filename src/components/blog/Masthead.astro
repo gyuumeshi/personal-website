@@ -23,14 +23,36 @@ const dateTimeOptions: Intl.DateTimeFormatOptions = {
 	month: "long",
 };
 
-const postSeries = content.data.seriesId
-    ? await getCollection("series")
-          .then(series => series.find(s => s.id === content.data.seriesId))
-          .catch(err => {
-            console.error("Failed to find series:", err);
-            return null;
-          })
-    : null;
+{
+	postSeries ? (
+		<>
+			<button
+				id="toggle-panel"
+				class="hidden md:flex mr-2 h-8 w-8 items-center bg-accent-base/10 flex-shrink-0 justify-center rounded-lg text-accent-base hover:brightness-110"
+				aria-label="Toggle Series Panel"
+				aria-controls="series-panel"
+			>
+				<Icon aria-hidden="true" class="flex-shrink-0 h-6 w-6" focusable="false" name="solar:notes-bold" />
+			</button>
+
+			<button
+				id="toggle-docs1"
+				class="hidden md:flex mr-2 h-8 w-8 items-center bg-accent-base/10 flex-shrink-0 justify-center rounded-lg text-accent-base hover:brightness-110"
+				aria-label="Open Docs1"
+			>
+				<Icon aria-hidden="true" class="h-6 w-6" focusable="false" name="solar:document-bold" />
+			</button>
+
+			<button
+				id="toggle-docs2"
+				class="hidden md:flex mr-2 h-8 w-8 items-center bg-accent-base/10 flex-shrink-0 justify-center rounded-lg text-accent-base hover:brightness-110"
+				aria-label="Open Docs2"
+			>
+				<Icon aria-hidden="true" class="h-6 w-6" focusable="false" name="solar:document-broken" />
+			</button>
+		</>
+	) : null
+}
 ---
 
 <div class="md:sticky md:top-8 md:z-10 flex items-end">
