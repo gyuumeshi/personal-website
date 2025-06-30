@@ -10,7 +10,7 @@ export const getStaticPaths = (async () => {
 	const validSeries = allSeries.filter((entry) => entry !== undefined);
 
 	return validSeries.map((entry) => ({
-		params: { slug: [entry.id] },
+		params: { slug: entry.id },
 		props: { series: entry },
 	}));
 }) satisfies GetStaticPaths;
