@@ -16,7 +16,7 @@ export const getStaticPaths = (async () => {
 type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 
 const { series } = Astro.props;
-const { Content } = await render(seriescopy);
+const { Content } = await render(series);
 ---
 
 <SeriesLayout seriescopy={seriescopy}>
