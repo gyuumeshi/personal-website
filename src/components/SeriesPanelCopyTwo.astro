@@ -6,11 +6,11 @@ const { seriesId } = Astro.props;
 const currentPath = Astro.url.pathname;
 
 const posts = await getCollection("post");
-const series = await getCollection("series");
+const series = await getCollection("seriescopytwo");
 
 const postsSeries = series.find((s) => s.id === seriesId);
 if (!postsSeries) {
-  throw new Error(`Series '${seriesId}' not found in 'series'`);
+  throw new Error(`Series '${seriesId}' not found in 'seriescopytwo'`);
 }
 
 const seriesPosts = posts

@@ -1,23 +1,32 @@
 ---
 import { Icon } from "astro-icon/components";
-import { getCollection, type CollectionEntry } from "astro:content";
+import { type CollectionEntry, getCollection } from "astro:content";
 
 const { seriesId } = Astro.props;
 const currentPath = Astro.url.pathname;
 
+// Fetch posts and all possible series collections
 const posts = await getCollection("post");
-const series = await getCollection("series");
+const seriesMain = await getCollection("series");
+const seriesCopy = await getCollection("seriescopy");
+const seriesCopyTwo = await getCollection("seriescopytwo");
 
-const postsSeries = series.find((s) => s.id === seriesId);
+// Combine all series
+const allSeries = [...seriesMain, ...seriesCopy, ...seriesCopyTwo];
+
+// Find the matching series
+const postsSeries = allSeries.find((s) => s.id === seriesId);
 if (!postsSeries) {
-  throw new Error(`Series '${seriesId}' not found in 'series'`);
+  	throw new Error(`Post(s) with Series ID '${seriesId}' not found.`);
 }
 
-const seriesPosts = posts
-  .filter((p) => p.data.seriesId === seriesId)
-  .sort((a, b) => (a.data.orderInSeries || 0) - (b.data.orderInSeries || 0));
----
-<!-- Same HTML as before, just scoped to 'series' -->
+// Filter posts by matching seriesId
+let seriesPosts: CollectionEntry<"post">[] = [];
+if (seriesId) {
+	seriesPosts = posts
+		.filter((p) => p.data.seriesId === seriesId)
+		.sort((a, b) => (a.data.orderInSeries || 0) - (b.data.orderInSeries || 0));
+}
 ---
 
 <aside
