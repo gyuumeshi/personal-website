@@ -5,7 +5,7 @@ import SeriesLayout from "@/layouts/Series.astro";
 import type { GetStaticPaths, InferGetStaticPropsType } from "astro";
 
 export const getStaticPaths = (async () => {
-	const allSeries = await getCollection("seriescopy2");
+	const allSeries = await getCollection("seriescopytwo");
 
 	const validSeries = allSeries.filter((entry) => entry !== undefined);
 

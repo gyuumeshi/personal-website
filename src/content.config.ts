@@ -70,8 +70,8 @@ const seriescopy = defineCollection({
 	}),
 });
 
-const seriescopy2 = defineCollection({
-	loader: glob({ base: "./src/content/seriescopy2", pattern: "**/*.{md,mdx}" }),
+const seriescopytwo = defineCollection({
+	loader: glob({ base: "./src/content/seriescopytwo", pattern: "**/*.{md,mdx}" }),
 	schema: z.object({
 		id: z.string(),
 		title: z.string(),
@@ -82,4 +82,4 @@ const seriescopy2 = defineCollection({
 // End
 
 // Series
-export const collections = { post, note, series, seriescopy, seriescopy2 };
+export const collections = { post, note, series, seriescopy, seriescopytwo };
