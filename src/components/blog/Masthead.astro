@@ -24,13 +24,21 @@ const dateTimeOptions: Intl.DateTimeFormatOptions = {
 };
 
 const postSeries = content.data.seriesId
-    ? await getCollection("series")
-          .then(series => series.find(s => s.id === content.data.seriesId))
-          .catch(err => {
-            console.error("Failed to find series:", err);
-            return null;
-          })
-    : null;
+  ? await (async () => {
+      const allCollections = await Promise.all([
+        getCollection("series"),
+        getCollection("seriescopy"),
+        getCollection("seriescopytwo"),
+      ]);
+
+      for (const collection of allCollections) {
+        const match = collection.find((s) => s.id === content.data.seriesId);
+        if (match) return match;
+      }
+
+      return null;
+    })()
+  : null;
 ---
 
 <div class="md:sticky md:top-8 md:z-10 flex items-end">
