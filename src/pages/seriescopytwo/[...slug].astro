@@ -11,7 +11,7 @@ export const getStaticPaths = (async () => {
 
 	return validSeries.map((entry) => ({
 		params: { slug: entry.id },
-		props: { series: entry },
+		props: { seriescopytwo: entry },
 	}));
 }) satisfies GetStaticPaths;
 
