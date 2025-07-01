@@ -1,0 +1,24 @@
+---
+import { getCollection, type CollectionEntry, render } from "astro:content";
+
+import SeriesLayout from "@/layouts/SeriesCopyTwo.astro";
+import type { GetStaticPaths, InferGetStaticPropsType } from "astro";
+
+// If you're using an adaptor in SSR mode, getStaticPaths wont work -> https://docs.astro.build/en/guides/routing/#modifying-the-slug-example-for-ssr
+export const getStaticPaths = (async () => {
+	const allSeries = await getCollection("seriescopytwo");
+	return allSeries.map((seriescopytwo) => ({
+		params: { slug: seriescopytwo.id },
+		props: { seriescopytwo },
+	}));
+}) satisfies GetStaticPaths;
+
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+
+const { seriescopytwo } = Astro.props;
+const { Content } = await render(seriescopytwo);
+---
+
+<SeriesLayout seriescopytwo={seriescopytwo}>
+	<Content />
+</SeriesLayout>
