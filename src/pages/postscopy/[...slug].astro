@@ -17,8 +17,10 @@ type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 
 const { post } = Astro.props;
 const { Content } = await render(post);
+
+const seriesId = post.data.seriesId;
 ---
 
-<PostLayout post={post} Sidebar={<SeriesPanelCopy seriesId={post.data.seriesId} />}>
+<PostLayout post={post} Sidebar={<SeriesPanelCopy seriesId={seriesId} />}>
 	<Content />
 </PostLayout>
