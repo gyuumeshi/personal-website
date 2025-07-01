@@ -54,7 +54,7 @@ const seriesPosts = posts
 
 				<ul class="mt-[1.0625rem] text-sm font-medium text-light">
 					{seriesPosts.map((p) => {
-						const isActive = currentPath === `/posts/${p.id}/`;
+						const isActive = currentPath === `/postscopy/${p.id}/`;
 						return (
 							<li class={`px-4 flex items-center line-clamp-2 pt-1 pb-1 ${isActive ? "rounded-lg bg-color-100" : ""}`}>
 								<a
