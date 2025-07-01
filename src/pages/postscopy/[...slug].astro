@@ -1,6 +1,7 @@
 ---
 import { getCollection, render } from "astro:content";
 import PostLayout from "@/layouts/BlogPost.astro";
+import SeriesPanelCopy from "@/components/SeriesPanelCopy.astro";
 import type { GetStaticPaths, InferGetStaticPropsType } from "astro";
 
 // If you're using an adaptor in SSR mode, getStaticPaths wont work -> https://docs.astro.build/en/guides/routing/#modifying-the-slug-example-for-ssr
@@ -18,6 +19,6 @@ const { post } = Astro.props;
 const { Content } = await render(post);
 ---
 
-<PostLayout post={post}>
+<PostLayout post={post} Sidebar={SeriesPanelCopy}>
 	<Content />
 </PostLayout>

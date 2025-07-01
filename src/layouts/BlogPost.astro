@@ -5,13 +5,16 @@ import TOC from "@/components/blog/TOC.astro";
 import WebMentions from "@/components/blog/webmentions/index.astro";
 import BaseLayout from "./Base.astro";
 import SeriesPanel from "@/components/SeriesPanel.astro";
+import SeriesPanelCopy from "@/components/SeriesPanelCopy.astro";
+import SeriesPanelCopyTwo from "@/components/SeriesPanelCopyTwo.astro";
 import { Icon } from "astro-icon/components";
 
 interface Props {
-	post: CollectionEntry<"post">;
+	post: CollectionEntry<"any">;
+	Sidebar: any;
 }
 
-const { post } = Astro.props;
+const { post, Sidebar } = Astro.props;
 const { ogImage, title, description, updatedDate, publishDate, seriesId } = post.data;
 
 const socialImage = ogImage ?? `/og-image/${post.id}.png`;
@@ -67,7 +70,7 @@ const { headings } = await render(post);
 	-->
 
 	<!-- SeriesPanel is inserted into the named slot "sidebar" -->
-	{seriesId && (<SeriesPanel slot="sidebar" seriesId={seriesId} />)}
+	{seriesId && Sidebar && (<Sidebar slot="sidebar" seriesId={seriesId} />)}
 
 	<Masthead content={post} />
 	
