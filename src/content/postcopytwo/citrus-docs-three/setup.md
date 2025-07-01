@@ -12,7 +12,7 @@ ogImage: ""
 
 ## Getting Started
 
-1. Install Astro and download the Astro Citrus template.
+1. Please install Astro and download the Astro Citrus template.
 2. Configure the `astro.config.mjs` file to set up your blog or documentation site.
 3. Add content using Markdown for a seamless writing experience.
 

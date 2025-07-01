@@ -5,7 +5,7 @@ import { getCollection, type CollectionEntry } from "astro:content";
 const { seriesId } = Astro.props;
 const currentPath = Astro.url.pathname;
 
-const posts = await getCollection("post");
+const posts = await getCollection("postcopytwo");
 const series = await getCollection("seriescopytwo");
 
 const postsSeries = series.find((s) => s.id === seriesId);

@@ -7,7 +7,7 @@ orderInSeries: 3
 tags: ["theming", "CSS", "citrus"]
 ---
 
-This approach to defining colors can be described as a **flexible theming system based on HSL (Hue, Saturation, Lightness) with the use of CSS variables**.
+This approach to defining colors cannot be described as a **flexible theming system based on HSL (Hue, Saturation, Lightness) with the use of CSS variables**.
 
 ## Principles of colorization
 1. **Flexibility through HSL**

@@ -38,6 +38,64 @@ const post = defineCollection({
 		}),
 });
 
+const postcopy = defineCollection({
+	loader: glob({ base: "./src/content/postcopy", pattern: "**/*.{md,mdx}" }),
+	schema: ({ image }) =>
+		baseSchema.extend({
+			description: z.string(),
+			coverImage: z
+				.object({
+					alt: z.string(),
+					src: image(),
+				})
+				.optional(),
+			draft: z.boolean().default(false),
+			ogImage: z.string().optional(),
+			tags: z.array(z.string()).default([]).transform(removeDupsAndLowerCase),
+			publishDate: z
+				.string()
+				.or(z.date())
+				.transform((val) => new Date(val)),
+			updatedDate: z
+				.string()
+				.optional()
+				.transform((str) => (str ? new Date(str) : undefined)),
+			// Series
+			seriesId: z.string().optional(), // Поле для связи с серией
+      		orderInSeries: z.number().optional(), // Опционально: для сортировки в серии
+			// End
+		}),
+});
+
+const postcopytwo = defineCollection({
+	loader: glob({ base: "./src/content/postcopytwo", pattern: "**/*.{md,mdx}" }),
+	schema: ({ image }) =>
+		baseSchema.extend({
+			description: z.string(),
+			coverImage: z
+				.object({
+					alt: z.string(),
+					src: image(),
+				})
+				.optional(),
+			draft: z.boolean().default(false),
+			ogImage: z.string().optional(),
+			tags: z.array(z.string()).default([]).transform(removeDupsAndLowerCase),
+			publishDate: z
+				.string()
+				.or(z.date())
+				.transform((val) => new Date(val)),
+			updatedDate: z
+				.string()
+				.optional()
+				.transform((str) => (str ? new Date(str) : undefined)),
+			// Series
+			seriesId: z.string().optional(), // Поле для связи с серией
+      		orderInSeries: z.number().optional(), // Опционально: для сортировки в серии
+			// End
+		}),
+});
+
 const note = defineCollection({
 	loader: glob({ base: "./src/content/note", pattern: "**/*.{md,mdx}" }),
 	schema: baseSchema.extend({
@@ -82,4 +140,4 @@ const seriescopytwo = defineCollection({
 // End
 
 // Series
-export const collections = { post, note, series, seriescopy, seriescopytwo };
+export const collections = { post, postcopy, postcopytwo, note, series, seriescopy, seriescopytwo };
