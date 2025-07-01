@@ -8,7 +8,7 @@ import { collectionDateSort } from "@/utils/date";
 import type { GetStaticPaths, Page } from "astro";
 import { Icon } from "astro-icon/components";
 import Badge from "@/components/Badge.astro";
-import { getCollection } from "astro.content";
+import { getCollection } from "astro:content";
 
 export const getStaticPaths = (async ({ paginate }) => {
 	const MAX_POSTS_PER_PAGE = 5;
