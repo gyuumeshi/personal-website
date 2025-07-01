@@ -17,8 +17,6 @@ const seriesPosts = posts
   .filter((p) => p.data.seriesId === seriesId)
   .sort((a, b) => (a.data.orderInSeries || 0) - (b.data.orderInSeries || 0));
 ---
-<!-- Same HTML as before, just scoped to 'series' -->
----
 
 <aside
 	id="seriescopytwo-panel"
