@@ -11,7 +11,7 @@ ogImage: ""
 
 ## Introducing
 
-Hi, I’m a theme for Astro, a simple starter that you can use to create your website or blog. If you want to know more about how you can customise me, add more posts, and make it your own, click on the GitHub icon link below and it will take you to my repo.
+こんにちは, I’m a theme for Astro, a simple starter that you can use to create your website or blog. If you want to know more about how you can customise me, add more posts, and make it your own, click on the GitHub icon link below and it will take you to my repo.
 
 ## About Citrus
 

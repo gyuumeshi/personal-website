@@ -12,7 +12,7 @@ import Badge from "@/components/Badge.astro";
 export const getStaticPaths = (async ({ paginate }) => {
 	const MAX_POSTS_PER_PAGE = 5;
 	const MAX_TAGS = 20;
-	const allPosts = await getAllPosts();
+	const allPosts = await getCollection("postcopytwo");
 	const uniqueTags = getUniqueTags(allPosts).slice(0, MAX_TAGS);
 	return paginate(allPosts.sort(collectionDateSort), {
 		pageSize: MAX_POSTS_PER_PAGE,
