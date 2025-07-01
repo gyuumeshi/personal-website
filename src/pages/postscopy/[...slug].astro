@@ -19,7 +19,6 @@ const { post } = Astro.props;
 const { Content } = await render(post);
 ---
 
-<PostLayout post={post} Sidebar={<SeriesPanelCopy seriesId={post.data.seriesId} />}
->
+<PostLayout post={post} Sidebar={<SeriesPanelCopy seriesId={post.data.seriesId} />}>
 	<Content />
 </PostLayout>
